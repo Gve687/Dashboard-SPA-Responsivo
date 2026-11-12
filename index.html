@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CloudPanel · Dashboard de Monitoreo</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ============ ZONA 1: NAVEGACIÓN ============ -->
+  <header class="topbar">
+    <button class="icon-btn" id="btnSidebarToggle" aria-label="Abrir/cerrar menú" aria-expanded="true">
+      <span class="hamburger"></span>
+    </button>
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span class="brand-name">CloudPanel</span>
+    </div>
+
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <span>Inicio</span>
+      <span class="sep">/</span>
+      <span aria-current="page">Servidores</span>
+    </nav>
+
+    <div class="topbar-actions">
+      <button class="icon-btn" id="btnThemeToggle" aria-label="Cambiar modo oscuro" title="Modo oscuro">
+        <svg class="icon icon-sun" viewBox="0 0 24 24" width="20" height="20"><path d="M12 4V2M12 22v-2M4 12H2m20 0h-2M5 5l-1.4-1.4M19 19l-1.4-1.4M5 19l-1.4 1.4M19 5l-1.4 1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/></svg>
+        <svg class="icon icon-moon" viewBox="0 0 24 24" width="20" height="20"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="avatar-btn" aria-label="Perfil de usuario">AR</button>
+    </div>
+  </header>
+
+  <aside class="sidebar" id="sidebar">
+    <nav class="side-nav" aria-label="Navegación principal">
+      <a href="#" class="side-link active" data-tip="¿Dónde estoy?">
+        <span class="side-ico">▣</span><span class="side-text">Dashboard</span>
+      </a>
+      <a href="#" class="side-link" data-tip="Volver al listado">
+        <span class="side-ico">🖧</span><span class="side-text">Servidores</span>
+      </a>
+      <a href="#" class="side-link">
+        <span class="side-ico">☁</span><span class="side-text">Instancias Cloud</span>
+      </a>
+      <a href="#" class="side-link">
+        <span class="side-ico">⎘</span><span class="side-text">Reportes</span>
+      </a>
+      <a href="#" class="side-link">
+        <span class="side-ico">⚙</span><span class="side-text">Configuración</span>
+      </a>
+    </nav>
+    <div class="side-footer">
+      <span class="side-ico">↩</span><span class="side-text">Ir a: Panel anterior</span>
+    </div>
+  </aside>
+
+  <!-- ============ ZONA 2: CONTENIDO DINÁMICO ============ -->
+  <main class="content" id="mainContent">
+
+    <section class="page-head">
+      <div>
+        <h1>Monitoreo de Servidores</h1>
+        <p class="muted">Métricas en tiempo real · Última actualización hace 2 min</p>
+      </div>
+      <button class="btn btn-primary" id="btnOpenDrawer">+ Configurar instancia</button>
+    </section>
+
+    <!-- Bento Grid de métricas -->
+    <section class="bento" aria-label="Métricas de consumo">
+      <article class="card bento-lg">
+        <header class="card-head"><h2>Uso de CPU</h2><span class="badge badge-ok">Normal</span></header>
+        <div class="metric-big">42<span>%</span></div>
+        <div class="sparkline" aria-hidden="true">
+          <svg viewBox="0 0 200 50" preserveAspectRatio="none"><polyline points="0,40 20,30 40,35 60,20 80,25 100,15 120,22 140,10 160,18 180,8 200,14" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+      </article>
+
+      <article class="card">
+        <header class="card-head"><h2>Memoria RAM</h2><span class="badge badge-warn">Alta</span></header>
+        <div class="metric-big">78<span>%</span></div>
+      </article>
+
+      <article class="card">
+        <header class="card-head"><h2>Disco</h2><span class="badge badge-ok">Normal</span></header>
+        <div class="metric-big">55<span>%</span></div>
+      </article>
+
+      <article class="card">
+        <header class="card-head"><h2>Red</h2><span class="badge badge-ok">Estable</span></header>
+        <div class="metric-big">120<span>Mb/s</span></div>
+      </article>
+
+      <article class="card bento-wide">
+        <header class="card-head"><h2>Instancias activas</h2><span class="badge badge-ok">8/10</span></header>
+        <div class="progress"><div class="progress-fill" style="width:80%"></div></div>
+      </article>
+    </section>
+
+    <!-- Tabla de registros -->
+    <section class="card table-card">
+      <header class="card-head">
+        <h2>Registro de servidores</h2>
+        <div class="table-filters">
+          <input type="search" class="input" placeholder="Buscar servidor…" aria-label="Buscar servidor">
+          <select class="input" aria-label="Filtrar por estado">
+            <option>Todos los estados</option>
+            <option>Activo</option>
+            <option>En mantenimiento</option>
+            <option>Apagado</option>
+          </select>
+        </div>
+      </header>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Servidor</th><th>Región</th><th>Estado</th><th>CPU</th><th>Acciones</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>srv-web-01</td><td>us-east-1</td>
+              <td><span class="badge badge-ok">Activo</span></td><td>38%</td>
+              <td><button class="btn btn-ghost btn-sm">Config.</button>
+                  <button class="btn btn-danger btn-sm js-delete">Eliminar</button></td>
+            </tr>
+            <tr>
+              <td>srv-db-02</td><td>us-west-2</td>
+              <td><span class="badge badge-warn">Mantenim.</span></td><td>—</td>
+              <td><button class="btn btn-ghost btn-sm">Config.</button>
+                  <button class="btn btn-danger btn-sm js-delete">Eliminar</button></td>
+            </tr>
+            <tr>
+              <td>srv-cache-03</td><td>eu-central-1</td>
+              <td><span class="badge badge-ok">Activo</span></td><td>61%</td>
+              <td><button class="btn btn-ghost btn-sm">Config.</button>
+                  <button class="btn btn-danger btn-sm js-delete">Eliminar</button></td>
+            </tr>
+            <tr>
+              <td>srv-legacy-04</td><td>sa-east-1</td>
+              <td><span class="badge badge-off">Apagado</span></td><td>0%</td>
+              <td><button class="btn btn-ghost btn-sm">Config.</button>
+                  <button class="btn btn-danger btn-sm js-delete" disabled title="Requiere permisos">Eliminar</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <button class="btn btn-ghost btn-sm" disabled>‹ Anterior</button>
+        <span class="muted">Página 1 de 3</span>
+        <button class="btn btn-ghost btn-sm">Siguiente ›</button>
+      </div>
+    </section>
+
+    <!-- Galería de estados de control (requerido por la Fase 4 / reporte) -->
+    <section class="card" id="estadosDemo">
+      <header class="card-head"><h2>Galería de estados de controles (evidencia)</h2></header>
+      <div class="estados-grid">
+        <div><p class="muted">Default</p><button class="btn btn-primary">Guardar</button></div>
+        <div><p class="muted">Hover</p><button class="btn btn-primary force-hover">Guardar</button></div>
+        <div><p class="muted">Focus</p><button class="btn btn-primary force-focus">Guardar</button></div>
+        <div><p class="muted">Disabled</p><button class="btn btn-primary" disabled>Guardar</button></div>
+        <div><p class="muted">Loading</p><button class="btn btn-primary is-loading" disabled><span class="spinner" aria-hidden="true"></span>Guardando…</button></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- overlay para cerrar sidebar/drawer en móvil -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- ============ ZONA 3: INTERACCIÓN / ACCIONES CRÍTICAS ============ -->
+
+  <!-- Drawer de configuración -->
+  <aside class="drawer" id="drawer" aria-hidden="true" aria-label="Panel de configuración de instancia">
+    <header class="drawer-head">
+      <h2>Configurar instancia</h2>
+      <button class="icon-btn" id="btnCloseDrawer" aria-label="Cerrar panel">✕</button>
+    </header>
+    <form class="drawer-form" id="drawerForm">
+      <label class="field">
+        <span>Nombre de la instancia</span>
+        <input class="input" type="text" placeholder="srv-web-05" required>
+      </label>
+
+      <label class="field">
+        <span>Descripción</span>
+        <textarea class="input" rows="3" placeholder="Notas internas sobre esta instancia…"></textarea>
+      </label>
+
+      <label class="field">
+        <span>Fecha de mantenimiento programado</span>
+        <input class="input" type="date">
+      </label>
+
+      <label class="field">
+        <span>Región</span>
+        <select class="input">
+          <option>us-east-1</option>
+          <option>us-west-2</option>
+          <option>eu-central-1</option>
+          <option>sa-east-1</option>
+        </select>
+      </label>
+
+      <label class="switch-row">
+        <span>Auto-escalado</span>
+        <span class="switch"><input type="checkbox" checked><span class="slider"></span></span>
+      </label>
+
+      <label class="switch-row">
+        <span>Notificaciones críticas</span>
+        <span class="switch"><input type="checkbox"><span class="slider"></span></span>
+      </label>
+
+      <label class="field">
+        <span>Campo deshabilitado (sin permisos)</span>
+        <input class="input" type="text" value="Solo lectura" disabled>
+      </label>
+
+      <div class="drawer-actions">
+        <button type="button" class="btn btn-ghost" id="btnCancelDrawer">Cancelar</button>
+        <button type="submit" class="btn btn-primary" id="btnSaveDrawer">Guardar cambios</button>
+      </div>
+    </form>
+  </aside>
+
+  <!-- Modal de confirmación -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h2 id="modalTitle">¿Eliminar instancia?</h2>
+      <p class="muted">Esta acción detendrá y eliminará permanentemente <strong id="modalServerName">srv-web-01</strong>. No se puede deshacer.</p>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" id="btnCancelModal">Cancelar</button>
+        <button class="btn btn-danger" id="btnConfirmModal">Sí, eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast de feedback -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
